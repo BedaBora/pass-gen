@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"math/big"
 	"os"
+
+	"github.com/atotto/clipboard"
 )
 
 const (
@@ -45,6 +47,12 @@ func main() {
 	}
 
 	fmt.Printf("Generated Password: %s\n", password)
+	err = clipboard.WriteAll(password)
+	if err != nil {
+		fmt.Printf("⚠️ Could not copy to clipboard: %v\n", err)
+	} else {
+		fmt.Println("📋 Password copied to clipboard!")
+	}
 }
 
 func generatePassword(length int, charset string) (string, error) {
